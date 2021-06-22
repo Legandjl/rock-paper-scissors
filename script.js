@@ -99,7 +99,10 @@ function winnerCheck(playerScore, computerScore) {
         console.log("The computer won with: " + computerScore);
      }
 
-     else (console.log("Draw " + playerScore + " + " + computerScore) )   
+     else { 
+         
+        (console.log("Draw " + playerScore + " + " + computerScore));        
+     }
 
 }
 
