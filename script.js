@@ -20,16 +20,10 @@ function gameRound(player, computer) {
         return "draw";
     }
 
-
-
-    else if (player != handsLogic.get(computer)) {
-
-        
+    else if (player != handsLogic.get(computer)) {        
 
         console.log("You lose, the computer picked: " + computer + " and you picked: " + player + ".");
         return false;
-
-
     }
 
     else {
@@ -38,11 +32,9 @@ function gameRound(player, computer) {
         return true;
     }
 
-
 }
 
 function game() {
-
 
     let playerScore = 0;
     let computerScore = 0;
@@ -50,17 +42,16 @@ function game() {
 
     for (let i = 0; i < 5; i++) {
 
-
     playerSelection = prompt("Choose Rock Paper or Scissors");
 
     let currentWinner = gameRound(playerSelection, computerplay());
 
-    if(currentWinner == "draw") {
+    if (currentWinner == "draw") {
 
         draw += 1;
     } 
 
-    else if(currentWinner == true) {
+    else if (currentWinner == true) {
 
         playerScore += 1;
     }
@@ -85,7 +76,6 @@ function game() {
 function computerplay() {
     
     return (hands[getRandom()].toLowerCase());
-
 }
 
 
@@ -110,7 +100,6 @@ function winnerCheck(playerScore, computerScore) {
      }
 
      else (console.log("Draw " + playerScore + " + " + computerScore) )   
-
 
 }
 
