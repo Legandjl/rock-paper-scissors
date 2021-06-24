@@ -1,5 +1,5 @@
 
-let hands = ["Rock", "Paper", "Scissors"];
+/*let hands = ["Rock", "Paper", "Scissors"];
 let handsLogic = new Map();
 handsLogic.set("paper", "scissors");
 handsLogic.set("rock", "paper");
@@ -110,7 +110,7 @@ function winnerCheck(playerScore, computerScore) {
 game();
 
 
-
+*/
 
 
 
