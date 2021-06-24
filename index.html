@@ -26,18 +26,19 @@
 
         <p>ROCK PAPER SCISSORS</p>
 
-        <img class = "icon" src ="images/rock.png">
-        <img class = "icon" src = "images/paper.png">
-        <img class = "icon" src = "images/scissors.png">
+        <img class = "icon" id = "rock" src ="images/rock.png">
+        <img class = "icon" id = "paper" src = "images/paper.png">
+        <img class = "icon" id = "scissors" src =  "images/scissors.png">
 
         <div id = "counter">
 
 
           <div class = "score" id = "playerScore">
+            
   
   
             <p>Player</p>
-            <p>10</p>
+            <p id = currentScore>0</p>
   
   
   
@@ -46,12 +47,13 @@
           <div class = "score" id = "playerScore">
   
             <p>computer</p>
-            <p>5</p>
+
+            <p id = "currentComputerScore"> 0 </p>
   
   
           </div>
 
-          <p id = "info">Computer wins, they put rock blaaa</p>
+          <p id = "info">Choose Rock, Paper or Scissors.</p>
   
   
         </div>

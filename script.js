@@ -1,9 +1,12 @@
-
-/*let hands = ["Rock", "Paper", "Scissors"];
+let hands = ["Rock", "Paper", "Scissors"];
 let handsLogic = new Map();
 handsLogic.set("paper", "scissors");
 handsLogic.set("rock", "paper");
 handsLogic.set("scissors", "rock");
+let playerScore = 0;
+let computerScore = 0;
+let draw = 0;
+let score = 0;
 
 
 //game logic
@@ -13,68 +16,58 @@ function gameRound(player, computer) {
 
     player = player.toLowerCase();
 
-    if(player == computer) {
+    if (player == computer) {
 
-        console.log("Draw, you both picked: " + player + ".");
+        updateInfo("Draw, you both picked: " + player + ".");
 
         return "draw";
-    }
+    } else if (player != handsLogic.get(computer)) {
 
-    else if (player != handsLogic.get(computer)) {        
-
-        console.log("You lose, the computer picked: " + computer + " and you picked: " + player + ".");
+        updateInfo("You lose, the computer picked: " + computer + " and you picked: " + player + ".");
         return false;
-    }
+    } else {
 
-    else {
-
-        console.log("You win, you picked: " + player + " and the computer picked: " + computer + ".");
+        updateInfo("You win, you picked: " + player + " and the computer picked: " + computer + ".");
         return true;
     }
 
 }
 
-function game() {
+function game(playerSelection, computer) {
 
-    let playerScore = 0;
-    let computerScore = 0;
-    let draw = 0;
+    if (playerScore >= 5 || computerScore >= 5) {
 
-    for (let i = 0; i < 5; i++) {
+        resetScores();
+        resetInfo();
+    } else if (computerScore < 6 && playerScore < 6) {
 
-    playerSelection = prompt("Choose Rock Paper or Scissors");
+        let currentWinner = gameRound(playerSelection, computer);
 
-    let currentWinner = gameRound(playerSelection, computerplay());
+        if (currentWinner == "draw") {
+            return;
 
-    if (currentWinner == "draw") {
+        } else if (currentWinner == true) {
 
-        draw += 1;
-    } 
+            playerScore += 1;
+        } else {
 
-    else if (currentWinner == true) {
+            computerScore += 1;
+        }
 
-        playerScore += 1;
     }
 
-    else {
+    if (playerScore == 5 || computerScore == 5) {
 
-        computerScore += 1;
-    }  
+        winnerCheck(playerScore, computerScore);
 
-        
+
     }
-
-
-    winnerCheck(playerScore, computerScore);
-
 }
-
-
 //helper functions
 
 
 function computerplay() {
-    
+
     return (hands[getRandom()].toLowerCase());
 }
 
@@ -82,35 +75,127 @@ function computerplay() {
 function getRandom() {
 
     return Math.floor(Math.random() * 3);
- 
-     
+
+
 }
 
 
 function winnerCheck(playerScore, computerScore) {
 
+    updateScores();
+
     if (playerScore > computerScore) {
 
-        console.log("You won with " + playerScore);
-     }
+        updateInfo("You won with " + playerScore);
+    } else {
 
-     else if (computerScore > playerScore) {
+        updateInfo("The computer won with: " + computerScore);
+    }
 
-        console.log("The computer won with: " + computerScore);
-     }
-
-     else { 
-         
-        (console.log("Draw " + playerScore + " + " + computerScore));        
-     }
+    gameOver();
 
 }
 
 
-game();
-
-
-*/
 
 
 
+
+let icon = document.querySelectorAll(".icon");
+let playerScoreBox = document.querySelector("#currentScore");
+let computerScoreBox = document.querySelector("#currentComputerScore");
+let infoBox = document.querySelector("#info");
+let gameOverCheck = false;
+let boxes = [playerScoreBox,computerScoreBox, infoBox];
+
+
+console.log(icon);
+
+icon.forEach((icon1) => {
+
+    icon1.addEventListener("click", iconClick);
+
+});
+
+boxes.forEach((content) => {
+
+    content.addEventListener("transitionend", removeTransition);
+
+
+});
+
+function iconClick(e) {
+
+    if(gameOverCheck === false) {
+
+    console.log(e.target.id);
+    game(e.target.id, computerplay());
+    updateScores();
+
+    }
+
+}
+
+
+
+
+function updateScores() {
+
+    console.log("not reaqched")
+   
+    playerScoreBox.textContent = playerScore.toString();
+    computerScoreBox.textContent = computerScore.toString();
+}
+
+function resetScores() {
+
+    playerScore = 0;
+    draw = 0;
+    computerScore = 0;
+    updateScores();
+}
+
+
+function updateInfo(message) {
+
+    infoBox.classList.add("infobutton");
+
+    
+
+    infoBox.textContent = message;
+
+
+}
+
+function resetInfo() {
+
+    infoBox.textContent = "Choose Rock, Paper or Scissors.";
+}
+
+function resetAll() {
+    resetScores();
+    resetInfo();
+    gameOverCheck = false;
+    infoBox.removeEventListener("click", resetAll);
+    infoBox.classList.remove("infobutton");
+}
+
+function gameOver() {
+
+    gameOverCheck = true;
+    infoBox.textContent = "Click me to play again.";
+    infoBox.addEventListener("click", resetAll);
+
+}
+
+
+/*function removeTransition() { //triggered when the name transition finishes - after fadeout, name is set to the global var name
+  
+    boxes.forEach((content) => {
+
+        console.log("im here");
+
+        content.classList.remove("opacity");
+    
+   
+ })};*/
