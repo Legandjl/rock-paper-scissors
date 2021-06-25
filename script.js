@@ -5,7 +5,6 @@ handsLogic.set("rock", "paper");
 handsLogic.set("scissors", "rock");
 let playerScore = 0;
 let computerScore = 0;
-let draw = 0;
 let score = 0;
 
 
@@ -63,6 +62,7 @@ function game(playerSelection, computer) {
 
     }
 }
+
 //helper functions
 
 
@@ -98,8 +98,7 @@ function winnerCheck(playerScore, computerScore) {
 
 
 
-
-
+//gui logic
 
 let icon = document.querySelectorAll(".icon");
 let playerScoreBox = document.querySelector("#currentScore");
@@ -117,12 +116,7 @@ icon.forEach((icon1) => {
 
 });
 
-boxes.forEach((content) => {
 
-    content.addEventListener("transitionend", removeTransition);
-
-
-});
 
 function iconClick(e) {
 
@@ -137,12 +131,8 @@ function iconClick(e) {
 }
 
 
-
-
 function updateScores() {
-
-    console.log("not reaqched")
-   
+     
     playerScoreBox.textContent = playerScore.toString();
     computerScoreBox.textContent = computerScore.toString();
 }
@@ -159,9 +149,6 @@ function resetScores() {
 function updateInfo(message) {
 
     infoBox.classList.add("infobutton");
-
-    
-
     infoBox.textContent = message;
 
 
@@ -183,19 +170,8 @@ function resetAll() {
 function gameOver() {
 
     gameOverCheck = true;
-    infoBox.textContent = "Click me to play again.";
+    infoBox.textContent += ". Click me to play again.";
     infoBox.addEventListener("click", resetAll);
 
 }
 
-
-/*function removeTransition() { //triggered when the name transition finishes - after fadeout, name is set to the global var name
-  
-    boxes.forEach((content) => {
-
-        console.log("im here");
-
-        content.classList.remove("opacity");
-    
-   
- })};*/
